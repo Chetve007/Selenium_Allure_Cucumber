@@ -2,33 +2,20 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
-public class sberTest {
-
-    WebDriver driver;
-    String url;
-
-    @Before
-    public void beforeTests() {
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        url = "http://www.sberbank.ru/ru/person";
-        driver.get(url);
-    }
+public class SberTest extends BaseTest {
 
     @Test
+    @Ignore
     public void sberTest() {
+        driver.get(url);
         Wait<WebDriver> wait = new WebDriverWait(driver, 5, 500);
 
         driver.findElement(By.xpath("//ul[@class]//span[@class and text()='Страхование']")).click();
@@ -41,10 +28,10 @@ public class sberTest {
         }
 
         WebElement fieldInsuranceTravel = wait.until(ExpectedConditions.visibilityOf(driver.findElement(
-                                                By.xpath("//h3[text()='Страхование путешественников']"))));
+                By.xpath("//h3[text()='Страхование путешественников']"))));
         String expected = "Страхование путешественников";
         assertEquals(String.format("Ожидаемое значение не соответствует фактическому результату: ожидалось [%s], факт - [%s]",
-                                             expected, fieldInsuranceTravel.getText()), expected, fieldInsuranceTravel.getText());
+                expected, fieldInsuranceTravel.getText()), expected, fieldInsuranceTravel.getText());
 
         driver.findElement(By.xpath("//div[@class]//a[contains(@href, 'https://online.sberbankins.ru/store/vzr/index')]")).click();
 
@@ -55,13 +42,13 @@ public class sberTest {
 
         assertEquals(String.format("Ожидаемое значение не соответствует фактическому результату: ожидалось [%s], факт - [%s]",
                 expected, driver.findElement(By.xpath("//div[@ng-show='!cbi']//h2[@class]")).getText()),
-                    expected, driver.findElement(By.xpath("//div[@ng-show='!cbi']//h2[@class]")).getText());
+                expected, driver.findElement(By.xpath("//div[@ng-show='!cbi']//h2[@class]")).getText());
 
         driver.findElement(By.xpath("//div[@class='b-form-box-title ng-binding' and text()='Минимальная']")).click();
         driver.findElement(By.xpath("//span[@ng-click and @class='b-continue-btn']")).click();
 
 //        заполняем "застрахованные"
-        fillField(By.name("insured0_surname"), "Sidorov");
+        fillField(By.name("insured0_surname"), "Sykis");
         fillField(By.name("insured0_name"), "Akop");
         fillField(By.name("insured0_birthDate"), "20.02.2002");
 
@@ -103,21 +90,5 @@ public class sberTest {
         wait.until(ExpectedConditions.visibilityOf(errorMessage));
         assertEquals(String.format("Ожидаемое значение не соответствует фактическому результату: ожидалось [%s], факт - [%s]",
                 notAllFieldsAreFilled, errorMessage.getText()), notAllFieldsAreFilled, errorMessage.getText());
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void fillField(By locator, String value) {
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(value);
-    }
-
-    @After
-    public void afterTests() {
-        driver.quit();
     }
 }
