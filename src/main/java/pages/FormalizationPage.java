@@ -106,7 +106,7 @@ public class FormalizationPage {
         continueButton.click();
     }
 
-    public WebElement errorMesageVisible(WebDriver driver) {
+    public WebElement errorMessageVisible(WebDriver driver) {
         WebElement errorMessage = driver.findElement(By.xpath("//div[text()='Заполнены не все обязательные поля']"));
         new WebDriverWait(driver, 5, 1000).until(ExpectedConditions.visibilityOf(errorMessage));
         return errorMessage;

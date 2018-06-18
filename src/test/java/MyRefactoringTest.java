@@ -1,15 +1,17 @@
-import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import pages.ChoiceOfPolicyPage;
 import pages.FormalizationPage;
 import pages.MainPage;
 import pages.TravelInsurancePage;
+import steps.BaseSteps;
 
 import static org.junit.Assert.*;
 
-public class MyRefactoringTest extends BaseTest {
+public class MyRefactoringTest extends BaseSteps {
 
     @Test
+    @Ignore
     public void newSberTest() throws Exception {
 
         MainPage mainPage = new MainPage(driver);
@@ -47,7 +49,7 @@ public class MyRefactoringTest extends BaseTest {
 
         String notAllFieldsAreFilled = "Заполнены не все обязательные поля";
         assertEquals(String.format("Ожидаемое значение не соответствует фактическому результату: ожидалось [%s], факт - [%s]",
-                notAllFieldsAreFilled, formalizationPage.errorMesageVisible(driver).getText()),
-                notAllFieldsAreFilled, formalizationPage.errorMesageVisible(driver).getText());
+                notAllFieldsAreFilled, formalizationPage.errorMessageVisible(driver).getText()),
+                notAllFieldsAreFilled, formalizationPage.errorMessageVisible(driver).getText());
     }
 }

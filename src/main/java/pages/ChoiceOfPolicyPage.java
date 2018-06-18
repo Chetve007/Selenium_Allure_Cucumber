@@ -14,8 +14,8 @@ public class ChoiceOfPolicyPage {
     @FindBy(xpath = "//span[@ng-click and @class='b-continue-btn']")
     WebElement issueButton;
 
-    public void selectSumInsurance(String sumiIem) {
-        sumInsurance.findElement(By.xpath(String.format(".//div[contains(text(), '%s')]", sumiIem))).click();
+    public void selectSumInsurance(String sumItem) {
+        sumInsurance.findElement(By.xpath(String.format(".//div[contains(text(), '%s')]", sumItem))).click();
     }
 
     public void clickIssueButton() {
