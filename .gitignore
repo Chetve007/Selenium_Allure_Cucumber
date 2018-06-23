@@ -1,1 +1,12 @@
 tasks.txt
+#IDEA Files
+.idea
+target
+*.iml
+*.ipr
+
+#Eclipse files
+*.settings
+*.classpath
+*.project
+*.pydevproject

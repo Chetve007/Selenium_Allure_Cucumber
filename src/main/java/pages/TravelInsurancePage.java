@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.BaseSteps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,9 @@ public class TravelInsurancePage {
     @FindBy(xpath = "//div[@class]//a[contains(@href, 'https://online.sberbankins.ru/store/vzr/index')]")
     WebElement issueOnlineButton;
 
-    public TravelInsurancePage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        Wait<WebDriver> wait = new WebDriverWait(driver, 7, 1000);
+    public TravelInsurancePage() {
+        PageFactory.initElements(BaseSteps.getDriver(), this);
+        Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 7, 1000);
         wait.until(ExpectedConditions.visibilityOf(issueOnlineButton));
     }
 

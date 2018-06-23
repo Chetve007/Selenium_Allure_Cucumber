@@ -1,4 +1,5 @@
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\pages\FormalizationPage.java
+C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\steps\ScenarioSteps.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\pages\TravelInsurancePage.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\steps\BaseSteps.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\steps\ChoiceOfPolicySteps.java
@@ -6,6 +7,6 @@ C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\steps\MainSteps.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\steps\FormalizationSteps.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\pages\ChoiceOfPolicyPage.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\steps\TravelInsuranceSteps.java
+C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\util\AllureReporter.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\pages\MainPage.java
-C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\util\AllureListener.java
 C:\Users\Aleksey\IdeaProjects\seleniumTest\src\main\java\util\TestProperties.java

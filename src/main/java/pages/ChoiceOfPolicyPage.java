@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import steps.BaseSteps;
 
 public class ChoiceOfPolicyPage {
 
@@ -22,7 +23,7 @@ public class ChoiceOfPolicyPage {
         issueButton.click();
     }
 
-    public ChoiceOfPolicyPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public ChoiceOfPolicyPage() {
+        PageFactory.initElements(BaseSteps.getDriver(), this);
     }
 }

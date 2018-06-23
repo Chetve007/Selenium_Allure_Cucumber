@@ -1,7 +1,7 @@
 package steps;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +25,7 @@ public class BaseSteps {
         return driver;
     }
 
-    @BeforeClass
+    @Before
     public static void setUp() throws Exception {
         switch (properties.getProperty("browser")) {
             case "firefox":
@@ -48,7 +48,7 @@ public class BaseSteps {
         driver.get(url);
     }
 
-    @AfterClass
+    @After
     public static void tearDown() throws Exception {
         driver.quit();
     }

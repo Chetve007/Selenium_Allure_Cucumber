@@ -5,10 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.BaseSteps;
+
+import static org.junit.Assert.*;
 
 public class FormalizationPage {
+
+    MainPage mainPage = new MainPage();
 
     @FindBy(name = "insured0_surname")
     WebElement insuredSurname;
@@ -52,8 +55,8 @@ public class FormalizationPage {
     @FindBy(xpath = "//div[text()='Заполнены не все обязательные поля']")
     WebElement errorMessage;
 
-    public FormalizationPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public FormalizationPage() {
+        PageFactory.initElements(BaseSteps.getDriver(), this);
     }
 
     public void fillField(String fieldName, String value) {
@@ -92,7 +95,37 @@ public class FormalizationPage {
             case "Место выдачи пасспорта":
                 fillField(issuePlace, value);
                 break;
+            default: throw new AssertionError("Поле '" + fieldName + "' на странице отсутствует");
         }
+    }
+
+    public String getFillField(String fieldName){
+        switch (fieldName){
+            case "Фамилия_застрах":
+                return insuredSurname.getAttribute("value");
+            case "Имя_застрах":
+                return insuredName.getAttribute("value");
+            case "ДР_застрах":
+                return insuredBirthDate.getAttribute("value");
+            case "Фамилия":
+                return surname.getAttribute("value");
+            case  "Имя":
+                return name.getAttribute("value");
+            case "Отчетство":
+                return middlename.getAttribute("value");
+            case "ДР":
+                return birthDate.getAttribute("value");
+            case "Серия пасспорта":
+                return passportSeries.getAttribute("value");
+            case "Номер пасспорта":
+                return passportNumber.getAttribute("value");
+            case "Дата выдачи пасспорта":
+                return issueDate.getAttribute("value");
+            case "Место выдачи пасспорта":
+                return issuePlace.getAttribute("value");
+        }
+
+        throw new AssertionError("Данное поле ('" + fieldName + "') отсутствует на странице!");
     }
 
     public void chooseSex(String sex) {
@@ -106,14 +139,22 @@ public class FormalizationPage {
         continueButton.click();
     }
 
-    public WebElement errorMessageVisible(WebDriver driver) {
-        WebElement errorMessage = driver.findElement(By.xpath("//div[text()='Заполнены не все обязательные поля']"));
-        new WebDriverWait(driver, 5, 1000).until(ExpectedConditions.visibilityOf(errorMessage));
-        return errorMessage;
+    public void errorMessageVisible() {
+        assertTrue("Не найдено сообщение об ошибке", mainPage.isElementPresent(BaseSteps.getDriver(), errorMessage));
     }
 
     void fillField(WebElement el, String value) {
         el.clear();
         el.sendKeys(value);
+    }
+
+    public void checkFieldErrorMessage(String errorMessage){
+        String actualValue = BaseSteps.getDriver().findElement(By.xpath("//div[@ng-show='tryNext && myForm.$invalid']")).getText();
+        assertTrue(String.format("Получено значение [%s]. Ожидалось [%s]", actualValue, errorMessage), actualValue.contains(errorMessage));
+    }
+
+    public String getFieldErrorMessage(String field) {
+        String xpath = "//div[text()='" + field + "']";
+        return BaseSteps.getDriver().findElement(By.xpath(xpath)).getText();
     }
 }

@@ -1,12 +1,11 @@
 package steps;
 
-import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
-public class MainSteps extends BaseSteps {
+public class MainSteps {
 
-    MainPage mainPage = new MainPage(driver);
+    MainPage mainPage = new MainPage();
 
     @Step("выбран пункт меню {0}")
     public void stepSelectMainMenu(String menuItem) {
@@ -15,14 +14,7 @@ public class MainSteps extends BaseSteps {
 
     @Step("выбран вид страхования {0}")
     public void stepSelectSubMenu(String subItem) {
-        mainPage.selectSubMenu(driver, subItem);
+        mainPage.selectSubMenu(BaseSteps.getDriver(), subItem);
     }
 
-    @Step("в случае ошибки повторить вызов страниц {0} и {1}")
-    public void stepErrorVisible(String menuItem, String subItem) {
-        if(mainPage.errorPageDisplayed()) {
-            mainPage.selectMainMenu(menuItem);
-            mainPage.selectSubMenu(driver, subItem);
-        }
-    }
 }
